@@ -55,8 +55,21 @@ class PostsDAO:
                 return post
 
 
-    def get_post_by_tag(self, tagname):
+    
+    def replace_string_for_posts_by_tag(self):
         posts = self.get_posts_all()
+        new_list = []
+
+        for sub in posts:
+            for i in sub['content']:
+                if i == '#':
+                    new_string = sub['content'].replace('#', 'ссылка')
+                
+        new_list.append(new_string)
+        return new_list
+
+    def get_post_by_tag(self, tagname):
+        posts = self.replace_string_for_posts_by_tag()
         tag_list = []
 
         for post in posts:
