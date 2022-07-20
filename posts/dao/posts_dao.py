@@ -41,8 +41,10 @@ class PostsDAO:
         posts = self.get_posts_all()
         posts_list = []
 
+        query_lower = query.lower()
+
         for post in posts:
-            if query in post['content']:
+            if query_lower in post['content'].lower():
                 posts_list.append(post)
         return posts_list
 
@@ -56,23 +58,4 @@ class PostsDAO:
 
 
     
-    def replace_string_for_posts_by_tag(self):
-        posts = self.get_posts_all()
-        new_list = []
-
-        for sub in posts:
-            for i in sub['content']:
-                if i == '#':
-                    new_string = sub['content'].replace('#', 'ссылка')
-                
-        new_list.append(new_string)
-        return new_list
-
-    def get_post_by_tag(self, tagname):
-        posts = self.replace_string_for_posts_by_tag()
-        tag_list = []
-
-        for post in posts:
-            if tagname == '#' and tagname in post['content']:
-                tag_list.append(post)
-        return tag_list
+    
